@@ -8,7 +8,7 @@ Este projeto utiliza Docker Compose para executar um ambiente DBT conectado a um
 
 ## Estrutura do Projeto
 
-Certifique-se de que o diretório do seu projeto (`c:\Users\elmessonjesus\Desktop\DBT\`) tenha os seguintes arquivos e diretórios principais:
+Certifique-se de que o diretório do seu projeto (`c:\Users\*********\Desktop\DBT\`) tenha os seguintes arquivos e diretórios principais:
 
 
 
@@ -37,7 +37,7 @@ Certifique-se de que o diretório do seu projeto (`c:\Users\elmessonjesus\Deskto
 1.  **Navegue até o Diretório do Projeto**:
     Abra seu terminal ou prompt de comando e navegue até a raiz deste projeto:
     ```bash
-    cd c:\Users\elmessonjesus\Desktop\DBT
+    cd c:\Users\*********\Desktop\DBT
     ```
 
 2.  **Inicie os Contêineres**:
@@ -63,7 +63,7 @@ Se você quiser executar outros comandos dbt (por exemplo, `dbt run`, `dbt test`
 1.  **Abra um novo terminal** (deixe o comando `docker-compose up` em execução se quiser manter o servidor de documentação e o PostgreSQL ativos).
 2.  Navegue até o diretório do projeto:
     ```bash
-    cd c:\Users\elmessonjesus\Desktop\DBT
+    cd c:\Users\*********\Desktop\DBT
     ```
 3.  Use `docker-compose run --rm dbt <seu_comando_dbt>`:
     *   Para executar seus modelos dbt:
@@ -96,6 +96,6 @@ Para parar os contêineres em execução:
 ## Solução de Problemas
 
 *   **Conflitos de Porta**: Se a porta `8080` (para dbt docs) ou `5432` (para PostgreSQL) já estiver em uso na sua máquina host, você precisará alterar o mapeamento da porta do lado do host no `docker-compose.yml`. Por exemplo, altere `ports: - "8080:8080"` para `ports: - "8081:8080"` para o serviço dbt.
-*   **`dbt_project.yml` não encontrado**: Certifique-se de que este arquivo exista na raiz do seu projeto (`c:\Users\elmessonjesus\Desktop\DBT\`) e esteja corretamente montado no contêiner.
+*   **`dbt_project.yml` não encontrado**: Certifique-se de que este arquivo exista na raiz do seu projeto (`c:\Users\*********\Desktop\DBT\`) e esteja corretamente montado no contêiner.
 *   **Perfil não encontrado**: Certifique-se de que `dbt_profiles/profiles.yml` exista e esteja configurado corretamente com um perfil que corresponda ao especificado em `dbt_project.yml`.
 *   **Problemas de Conexão com o Banco de Dados**: Verifique as credenciais e o host do PostgreSQL em `profiles.yml` (usando variáveis de ambiente) correspondem às configurações em `docker-compose.yml`. Verifique os logs do contêiner `postgres` para quaisquer erros de banco de dados: `docker-compose logs postgres`.
