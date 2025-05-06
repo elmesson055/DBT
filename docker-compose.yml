@@ -1,0 +1,33 @@
+services:
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:latest
+    container_name: dbt
+    working_dir: /usr/app
+    volumes:
+      - ./:/usr/app
+      - ./dbt_profiles:/usr/app/.dbt
+    environment:
+      DBT_PROFILES_DIR: /usr/app/.dbt
+      POSTGRES_USER: dbt_user
+      POSTGRES_PASSWORD: dbt_password
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: dbt_db
+    entrypoint: "" # Add this line back to override the default entrypoint
+    # command: ["ls", "-la", "/usr/app"] # Change this command back
+    command: >
+      sh -c "dbt docs generate && dbt docs serve --host 0.0.0.0 --port 8080 --no-browser"
+    ports:
+      - "8080:8080" # Expose port 8080 to the host
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: dbt_user
+      POSTGRES_PASSWORD: dbt_password
+      POSTGRES_DB: dbt_db
+    ports:
+      - "5432:5432"
